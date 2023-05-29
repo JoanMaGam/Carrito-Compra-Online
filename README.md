@@ -1,7 +1,7 @@
 # Carrito-Compra-Online
 Carrito de compra interactivo en JavaScript utilizando gestión del DOM, eventos y persistencia de datos en LocalStorage. Estilos con Bootstrap.
 
-Deploy: 
+Deploy:  https://joanmagam.github.io/Carrito-Compra-Online/
 
 Vista previa: 
 
