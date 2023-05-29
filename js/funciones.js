@@ -6,8 +6,11 @@ function printProducts(pList, pDom, pBoton = true) { //añado un parametro opcio
 // <li>Nombre - 123€ <button>Añadir</button> </li> 
 function printOneProduct(pProduct, pDom, pBoton) {
     const li = document.createElement('li');
+    li.classList.add('m-2')
     const button = document.createElement('button');
+    button.classList.add('ms-2')
     const btnDel = document.createElement('button');
+    btnDel.classList.add('ms-2')
     if (pBoton) { //si existe el valor de pBoton se creara, sino no.
         button.textContent = 'Añadir';
         button.dataset.id = pProduct.id;
