@@ -13,11 +13,14 @@ function printOneProduct(pProduct, pDom, pBoton) {
     btnDel.classList.add('ms-2')
     if (pBoton) { //si existe el valor de pBoton se creara, sino no.
         button.textContent = 'Añadir';
+        button.classList.add('rounded-2');
         button.dataset.id = pProduct.id;
         button.addEventListener('click', addCart);
     } else {
         // <button id="delete">Borrar Item</button>
         btnDel.textContent = 'Eliminar producto';
+        btnDel.classList.add('rounded-2', 'p-2-0');
+
         btnDel.dataset.id = pProduct.id;
         btnDel.addEventListener('click', delProduct);
 
