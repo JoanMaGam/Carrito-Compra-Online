@@ -29,4 +29,28 @@ function deleteCart(event) {
     calcularPrecioTotal(carrito, divPrecioTotal);
 }
 
+function delProduct(event) {
+    //Saco el array del localStorage
+    const carrito = (localStorage.getItem('carrito')) ? JSON.parse(localStorage.getItem('carrito')) : [];
+
+    //Borrado interfaz
+    const liDel = event.target.parentNode;
+    liDel.parentNode.removeChild(liDel);
+
+    //Borrado array
+    deleteArray(parseInt(event.target.dataset.id), carrito);
+
+    // Vuelvo a guardar el array sin el objeto eliminado en el localStorage
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    printProducts(carrito, ulCarrito, false);
+    calcularPrecioTotal(carrito, divPrecioTotal);
+}
+
+function deleteArray(pId, pList) {
+    let position = pList.findIndex(product => product.id === pId);
+    if (position !== -1) {
+        pList.splice(position, 1);
+    }
+    return pList;
+}
 

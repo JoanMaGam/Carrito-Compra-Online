@@ -6,12 +6,18 @@ function printProducts(pList, pDom, pBoton = true) { //añado un parametro opcio
 // <li>Nombre - 123€ <button>Añadir</button> </li> 
 function printOneProduct(pProduct, pDom, pBoton) {
     const li = document.createElement('li');
-
     const button = document.createElement('button');
+    const btnDel = document.createElement('button');
     if (pBoton) { //si existe el valor de pBoton se creara, sino no.
         button.textContent = 'Añadir';
         button.dataset.id = pProduct.id;
         button.addEventListener('click', addCart);
+    } else {
+        // <button id="delete">Borrar Item</button>
+        btnDel.textContent = 'Eliminar producto';
+        btnDel.dataset.id = pProduct.id;
+        btnDel.addEventListener('click', delProduct);
+
     }
 
     const textli = document.createTextNode(`${pProduct.title} - ${pProduct.price}€`);
@@ -19,7 +25,7 @@ function printOneProduct(pProduct, pDom, pBoton) {
     if (pBoton) { //si existe el valor de pBoton se creará, sino no.
         li.append(textli, button);
     } else {
-        li.append(textli);
+        li.append(textli, btnDel);
     }
 
     pDom.appendChild(li);
@@ -48,6 +54,28 @@ function addCart(event) {
     //Para ello usaremos la funcion: JSON.stringify
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
+}
+
+function delProduct(event) {
+    //Saco el array del localStorage
+    const carrito = (localStorage.getItem('carrito')) ? JSON.parse(localStorage.getItem('carrito')) : [];
+
+    //Borrado interfaz
+    const liDel = event.target.parentNode;
+    liDel.parentNode.removeChild(liDel);
+
+    //Borrado array
+    deleteArray(parseInt(event.target.dataset.id), carrito);
 
 
+    // Vuelvo a guardar el array sin el objeto eliminado en el localStorage
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+function deleteArray(pId, pList) {
+    let position = pList.findIndex(product => product.id === pId);
+    if (position !== -1) {
+        pList.splice(position, 1);
+    }
+    return pList;
 }
